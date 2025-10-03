@@ -1,16 +1,19 @@
 -- Bài 1
 USE northwind;
 
+
 -- 1) Danh sách các products có từ ‘Boxes’ trong cột QuantityPerUnit. (1 điểm)
 SELECT ProductID, ProductName, QuantityPerUnit
 FROM products
 WHERE QuantityPerUnit LIKE '%Boxes%';
 
--- 2) Danh sách các products có Unitprice lớn hớn 10 và nhỏ hơn 15. (1 điểm)
+
+-- 2) Danh sách các products có UnitPrice lớn hớn 10 và nhỏ hơn 15. (1 điểm)
 SELECT ProductID, ProductName, UnitPrice
 FROM products
 WHERE UnitPrice > 10 AND UnitPrice < 15
 ORDER BY UnitPrice, ProductName;
+
 
 -- 3) Danh sách các orders có OrderDate được lập trong tháng 10 năm 1997. (1 điểm)
 SELECT OrderID, CustomerID, EmployeeID, OrderDate
@@ -19,7 +22,8 @@ WHERE OrderDate >= '1997-10-01'
   AND OrderDate <  '1997-11-01'
 ORDER BY OrderDate, OrderID;
 
--- 4) Danh sách các products ứng với tiền tồn vốn. Thông tin bao gồm ProductId, ProductName, Unitprice, UnitsInStock, TotalAccount. Trong đó TotalAccount= UnitsInStock * Unitprice. (1 điểm)
+
+-- 4) Danh sách các products ứng với tiền tồn vốn. Thông tin bao gồm ProductId, ProductName, UnitPrice, UnitsInStock, TotalAccount. Trong đó TotalAccount= UnitsInStock * UnitPrice. (1 điểm)
 SELECT 
     ProductID, 
     ProductName, 
@@ -29,11 +33,13 @@ SELECT
 FROM products
 ORDER BY TotalAccount DESC, ProductName;
 
+
 -- 5) Danh sách các customers có city là Paris. (1 điểm)
 SELECT CustomerID, CompanyName, City, Country
 FROM customers
 WHERE City = 'Paris'
 ORDER BY CompanyName;
+
 
 -- 6) Danh sách 10 customers có city bắt đầu ‘M’. (1 điểm)
 SELECT CustomerID, CompanyName, City, Country
@@ -41,6 +47,7 @@ FROM customers
 WHERE City LIKE 'M%'
 ORDER BY City, CompanyName
 LIMIT 10;
+
 
 -- 7) Danh sách 3 employees có tuổi lớn nhất. Thông tin bao gồm EmployeeID, EmployeeName, Age. Trong đó, EmployeeName được ghép từ LastName và FirstName; Age là năm hiện hành từ cho năm sinh. (2 điểm)
 SELECT 
@@ -51,7 +58,8 @@ FROM employees
 ORDER BY Age DESC, BirthDate ASC, EmployeeID ASC
 LIMIT 3;
 
--- 8) Danh sách các orders ứng với tổng tiền của từng hóa đơn có Shipcity là ‘Madrid’. Thông tin bao gồm OrdersId, OrderDate, TotalAccount. Trong đó TotalAccount là Sum của Quantity * Unitprice, kết nhóm theo OrderId. (2 điểm)
+
+-- 8) Danh sách các orders ứng với tổng tiền của từng hóa đơn có Shipcity là ‘Madrid’. Thông tin bao gồm OrdersId, OrderDate, TotalAccount. Trong đó TotalAccount là Sum của Quantity * UnitPrice, kết nhóm theo OrderId. (2 điểm)
 SELECT 
     o.OrderID,
     o.OrderDate,
@@ -63,9 +71,9 @@ WHERE o.ShipCity = 'Madrid'
 GROUP BY o.OrderID, o.OrderDate
 ORDER BY o.OrderDate, o.OrderID;
 
---  Bài 2
-USE northwind;
 
+
+--  Bài 2
 USE northwind;
 
 
@@ -108,7 +116,7 @@ FROM products
 WHERE QuantityPerUnit LIKE '%Boxes%';
 
 
--- 6) Danh sách các products có Unitprice lớn hơn 10 và nhỏ hơn 15.
+-- 6) Danh sách các products có UnitPrice lớn hơn 10 và nhỏ hơn 15.
 SELECT ProductID, ProductName, UnitPrice
 FROM products
 WHERE UnitPrice > 10 AND UnitPrice < 15;
@@ -121,8 +129,8 @@ WHERE OrderDate >= '1996-09-01' AND OrderDate < '1996-10-01';
 
 
 -- 8) Danh sách các products ứng với tiền tồn vốn. 
--- Thông tin bao gồm ProductId, ProductName, Unitprice, UnitsInStock, TotalAccount. 
--- TotalAccount= UnitsInStock * Unitprice.
+-- Thông tin bao gồm ProductId, ProductName, UnitPrice, UnitsInStock, TotalAccount. 
+-- TotalAccount= UnitsInStock * UnitPrice.
 SELECT 
   ProductID, ProductName, UnitPrice, UnitsInStock,
   (UnitsInStock * UnitPrice) AS TotalAccount
@@ -156,7 +164,7 @@ LIMIT 2;
 
 -- 12) Danh sách các products đã từng có khách hàng đặt hàng 
 -- (tức là ProductId có trong Order Details). 
--- Thông tin bao gồm ProductId, ProductName, Unitprice.
+-- Thông tin bao gồm ProductId, ProductName, UnitPrice.
 SELECT DISTINCT 
   p.ProductID, p.ProductName, p.UnitPrice
 FROM products p
@@ -166,7 +174,7 @@ ORDER BY p.ProductID;
 
 -- 13) Danh sách các orders ứng với tổng tiền của từng hóa đơn. 
 -- Thông tin bao gồm OrdersId, OrderDate, TotalAccount. 
--- TotalAccount = Sum(Quantity * Unitprice), nhóm theo OrderId.
+-- TotalAccount = Sum(Quantity * UnitPrice), nhóm theo OrderId.
 SELECT 
   o.OrderID,
   o.OrderDate,
